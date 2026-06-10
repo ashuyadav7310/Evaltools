@@ -1,0 +1,4 @@
+Database initialized
+INFO:     127.0.0.1:56138 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57310 - "GET /api/admin/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57311 - "GET /api/admin/trainers HTTP/1.1" 200 OK

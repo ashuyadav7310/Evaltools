@@ -1,0 +1,17 @@
+[Unit]
+Description=ComCoach Next.js Frontend
+After=network.target
+
+[Service]
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/opt/comcoach/ComCoachAI_V3/frontend-next
+EnvironmentFile=/opt/comcoach/ComCoachAI_V3/.env
+Environment=PORT=3000
+Environment=HOSTNAME=127.0.0.1
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

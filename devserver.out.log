@@ -1,0 +1,25 @@
+
+> evaltools-home@1.0.0 dev
+> vite --host 0.0.0.0 --port 5173
+
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m1440[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://172.23.81.44:[1m5173[22m/[39m
+[2m12:34:57 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.js[22m
+[2m12:34:57 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.js[22m
+[2m12:35:29 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.js[22m
+[2m12:37:52 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.js[22m
+[2m12:42:14 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.js[22m
+[2m12:43:42 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.js[22m
+[2m12:48:25 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/config.js[22m
+[2m12:50:23 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/config.js[22m
+[2m2:32:25 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/config.js[22m
+[2m2:32:33 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/config.js[22m
+[2m2:48:56 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/config.js[22m
+[2m2:49:01 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.js[22m
+[2m2:49:06 pm[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles.css[22m
+[2m2:50:34 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.js[22m
+[2m2:50:34 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/config.js[22m
+[2m2:50:34 pm[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles.css[22m

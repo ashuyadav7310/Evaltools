@@ -1,0 +1,14 @@
+[2m10:49:15 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /comcoachai/[39m
+Error: connect ECONNREFUSED 127.0.0.1:3002
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m11:09:29 am[22m [31m[1m[vite][22m[39m [31mInternal server error: URI malformed[39m
+      at decodeURI (<anonymous>)
+      at viteTransformMiddleware (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62024:13)
+      at call (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:41364:7)
+      at next (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:41308:5)
+      at viteServePublicMiddleware (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51663:14)
+      at call (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:41364:7)
+      at next (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:41308:5)
+      at viteHMRPingMiddleware (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:63369:7)
+      at call (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:41364:7)
+      at next (file:///D:/EvalTool/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:41308:5)
