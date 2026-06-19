@@ -1,0 +1,52 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "System Decomposition & Architecture Design",
+      "description": "Evaluate identification of core systems (payments engine, fraud detection, settlement, APIs, etc.), modular decomposition, and clarity of architectural flow.",
+      "weight": 20,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R2",
+      "name": "Data Flow & Interaction Design",
+      "description": "Evaluate how well the participant explains data exchange between components (latency, consistency, throughput, event flow, APIs, messaging systems).",
+      "weight": 15,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R3",
+      "name": "Scalability, Reliability & Fault Tolerance",
+      "description": "Assess ability to design for high TPS, concurrency, failover, redundancy, graceful degradation, and handling peak loads (10x spikes).",
+      "weight": 20,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R4",
+      "name": "Failure Analysis & Mitigation Strategies",
+      "description": "Evaluate identification of failure points (technical, integration, external) and robustness of mitigation strategies (circuit breakers, retries, fallback, reconciliation).",
+      "weight": 15,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R5",
+      "name": "Trade-offs, Compliance & Business Alignment",
+      "description": "Assess understanding of architectural trade-offs (CAP, latency vs consistency, cost vs reliability), regulatory constraints (PCI DSS, ISO), and business impact/ROI.",
+      "weight": 20,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R6",
+      "name": "Clarity, Structure & Presentation",
+      "description": "Evaluate logical flow, structuring (sections/diagrams), readability, and ability to communicate complex architecture clearly.",
+      "weight": 10,
+      "type": "format",
+      "requires_keypoints": false
+    }
+  ]
+}

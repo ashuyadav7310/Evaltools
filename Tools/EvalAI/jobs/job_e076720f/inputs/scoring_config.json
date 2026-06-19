@@ -1,0 +1,78 @@
+{
+  "format_rules": [
+    {
+      "Metric": "paragraph_blocks",
+      "Min": 0,
+      "Max": 4,
+      "Score": 0.1
+    },
+    {
+      "Metric": "paragraph_blocks",
+      "Min": 5,
+      "Max": 12,
+      "Score": 0.25
+    },
+    {
+      "Metric": "paragraph_blocks",
+      "Min": 13,
+      "Max": 25,
+      "Score": 0.35
+    },
+    {
+      "Metric": "paragraph_blocks",
+      "Min": 26,
+      "Max": 999,
+      "Score": 0.4
+    },
+    {
+      "Metric": "lists",
+      "Min": 1,
+      "Max": 999,
+      "Score": 0.2
+    },
+    {
+      "Metric": "images",
+      "Min": 1,
+      "Max": 999,
+      "Score": 0.1
+    },
+    {
+      "Metric": "table_weight",
+      "Min": "-",
+      "Max": "-",
+      "Score": 0.25
+    },
+    {
+      "Metric": "image_completeness_weight",
+      "Min": "-",
+      "Max": "-",
+      "Score": 0.2
+    }
+  ],
+  "style_rules": [
+    {
+      "Rule": "paragraph_blocks",
+      "Min": 0,
+      "Max": 4,
+      "Penalty": -0.25
+    },
+    {
+      "Rule": "paragraph_blocks",
+      "Min": 5,
+      "Max": 15,
+      "Penalty": -0.1
+    },
+    {
+      "Rule": "avg_sentence_len",
+      "Min": 12,
+      "Max": 20,
+      "Penalty": 0.05
+    },
+    {
+      "Rule": "avg_sentence_len",
+      "Min": 0,
+      "Max": 8,
+      "Penalty": -0.1
+    }
+  ]
+}

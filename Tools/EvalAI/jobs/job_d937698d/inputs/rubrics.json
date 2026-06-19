@@ -1,0 +1,36 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Business Writing Standards",
+      "description": "Evaluate whether the response demonstrates professional communication, accurate system design reasoning, and alignment with real-time payments requirements such as scalability, reliability, and security.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R2",
+      "name": "Clarity & Conciseness",
+      "description": "Evaluate how clearly the response explains complex distributed system concepts (e.g., concurrency, latency, fault tolerance) while maintaining a logical flow and avoiding unnecessary verbosity.",
+      "weight": 20,
+      "type": "style",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R3",
+      "name": "Cultural Adaptation",
+      "description": "Evaluate whether the response reflects an understanding of diverse stakeholders (citizens, banks, regulators, international partners) and aligns with financial, regulatory, and cross-border considerations.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R4",
+      "name": "Presentation & Formatting",
+      "description": "Evaluate the structure and organization of the response, including clear segmentation (e.g., systems, data flow, failures, trade-offs), and effective use of bullet points, diagrams, or tables for architectural clarity.",
+      "weight": 10,
+      "type": "format",
+      "requires_keypoints": false
+    }
+  ]
+}

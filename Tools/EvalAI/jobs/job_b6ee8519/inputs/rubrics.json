@@ -1,0 +1,44 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Email Structure",
+      "description": "Checks subject, greeting, closing, signature and professional formatting",
+      "weight": 5,
+      "type": "email_format",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R2",
+      "name": "Task Delay Communication",
+      "description": "Evaluates whether the student clearly mentions Task T1 delay and High Priority context",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R3",
+      "name": "Stakeholder Communication",
+      "description": "Evaluates whether Shabaresh Rao is informed and Swapnesh, Jithin Mohan and Manfred are kept in loop",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R4",
+      "name": "Professional Content Quality",
+      "description": "Evaluates apology tone, reason for delay, revised timeline and request for resources",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R5",
+      "name": "Writing Clarity and Tone",
+      "description": "Evaluates grammar, clarity, conciseness and formal professional tone",
+      "weight": 5,
+      "type": "style",
+      "requires_keypoints": false
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Relevance",
+      "description": "Evaluate how well the response directly addresses each reflection question, stays on topic, and provides meaningful and appropriate insights related to the learning experience.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true,
+      "keypoints_file": "R1.docx"
+    },
+    {
+      "id": "R2",
+      "name": "Application to Real-World Scenarios",
+      "description": "Evaluate the extent to which the response connects reflections to real-life situations, past experiences, or professional contexts, demonstrating practical applicability of critical thinking.",
+      "weight": 20,
+      "type": "content",
+      "requires_keypoints": true,
+      "keypoints_file": "R2.docx"
+    },
+    {
+      "id": "R3",
+      "name": "Clarity and Structure of Writing",
+      "description": "Evaluate the clarity, coherence, and organization of the response, including logical flow of ideas, readability, and proper structuring of thoughts within the expected word limits.",
+      "weight": 10,
+      "type": "style",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R4",
+      "name": "Use of Critical Thinking Concepts and Methods",
+      "description": "Evaluate how effectively the response incorporates critical thinking concepts (e.g., biases, fast vs slow thinking, problem framing) and demonstrates depth of analysis and reasoning.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true,
+      "keypoints_file": "R4.docx"
+    }
+  ]
+}

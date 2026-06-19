@@ -1,0 +1,48 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Understanding of Key Concepts",
+      "description": "Evaluates how well the participant understands and explains the core concepts, frameworks, and learnings from the program. Focuses on clarity of thought, conceptual depth, and relevance to the discussed modules.",
+      "weight": 30,
+      "type": "content",
+      "requires_keypoints": true,
+      "keypoints_file": "R1.docx"
+    },
+    {
+      "id": "R2",
+      "name": "Application of Learning",
+      "description": "Assesses the participant\u2019s ability to apply program learnings in real workplace situations. Emphasis is placed on practical examples, relevance of actions taken, and connection between learning and execution.",
+      "weight": 30,
+      "type": "content",
+      "requires_keypoints": true,
+      "keypoints_file": "R2.docx"
+    },
+    {
+      "id": "R3",
+      "name": "Impact & Outcomes",
+      "description": "Measures the effectiveness and results achieved through the application of learning. Focuses on improvements, outcomes, business impact, or positive changes resulting from the participant\u2019s actions.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true,
+      "keypoints_file": "R3.docx"
+    },
+    {
+      "id": "R4",
+      "name": "Action Orientation (Forward Plan)",
+      "description": "Evaluates how clearly the participant defines future actions and implementation plans based on their learning experience. Focuses on ownership, feasibility, and measurable next steps.",
+      "weight": 20,
+      "type": "content",
+      "requires_keypoints": true,
+      "keypoints_file": "R4.docx"
+    },
+    {
+      "id": "R5",
+      "name": "Presentation Effectiveness",
+      "description": "Assesses the overall quality of the presentation including structure, communication clarity, professionalism, engagement, and visual effectiveness. Focuses on how effectively ideas are conveyed to the audience.",
+      "weight": 10,
+      "type": "format",
+      "requires_keypoints": false
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Clarity of Problem Framing",
+      "description": "How well the challenge, context, and constraints are understood and articulated.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R2",
+      "name": "Goals & Success Measures",
+      "description": "Definition of outcomes, metrics, and non-functional expectations.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R3",
+      "name": "Solution Design",
+      "description": "Quality, structure, and completeness of the proposed architecture and flows.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R4",
+      "name": "Use of AI & Automation",
+      "description": "Appropriateness of AI vs non-AI choices, with clear reasoning and balance.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R5",
+      "name": "Decision Rationale",
+      "description": "Justification of key design choices, with logical traceability.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R6",
+      "name": "Presentation & Clarity",
+      "description": "Clarity, professionalism, and effectiveness in conveying the solution.",
+      "weight": 10,
+      "type": "format",
+      "requires_keypoints": false
+    }
+  ]
+}

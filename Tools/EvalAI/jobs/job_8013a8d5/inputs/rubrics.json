@@ -1,0 +1,44 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Email Structure",
+      "description": "Checks subject, greeting, closing, signature and professional formatting",
+      "weight": 20,
+      "type": "email_format",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R2",
+      "name": "Email Tone",
+      "description": "Assesses whether the email maintains a professional, respectful, and responsible tone suitable for workplace communication when reporting a delay to a manager and informing colleagues.",
+      "weight": 20,
+      "type": "email",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R3",
+      "name": "Accuracy",
+      "description": "Checks whether the email correctly communicates the situation, including the task delay, valid reason for the delay, and accurate mention of relevant stakeholders while maintaining grammatical correctness and factual consistency.",
+      "weight": 30,
+      "type": "email",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R4",
+      "name": "Clarity",
+      "description": "Measures how clearly the participant explains the delay, including the reason for the delay, the current status of the task, expected next steps, and any required support or resources needed to complete the task.",
+      "weight": 20,
+      "type": "email",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R5",
+      "name": "Conciseness",
+      "description": "Evaluates whether the email communicates the delay, stakeholders involved, and required support in a clear and direct manner without unnecessary repetition or irrelevant details.",
+      "weight": 10,
+      "type": "email",
+      "requires_keypoints": false
+    }
+  ]
+}

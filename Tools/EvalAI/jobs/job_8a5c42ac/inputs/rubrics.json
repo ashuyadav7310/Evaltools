@@ -1,0 +1,44 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Compliance to Arc42 Documentation",
+      "description": "This evaluates how well the submission adheres to the Arc42 architectural documentation framework, including the presence, structure, and relevance of key sections. It assesses whether the document is well-organized, follows a logical architectural flow, and uses the Arc42 template appropriately to communicate the system design in a clear and standardized manner.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R2",
+      "name": "Functional and NFR Identification",
+      "description": "This  assesses the clarity, completeness, and correctness of the identified functional requirements and non-functional requirements (NFRs). It evaluates how well the team has captured business needs, quality attributes, and system constraints, and whether these requirements are meaningful, realistic, and aligned with the proposed architecture.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R3",
+      "name": "Business and Technical Context",
+      "description": "This evaluates the team\u2019s understanding of the business problem and the technical environment in which the system operates. It focuses on how clearly the problem domain, stakeholders, users, external systems, and integration points are described, and whether the context is effectively communicated through narratives and diagrams.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R4",
+      "name": "Architecture",
+      "description": "This assesses the quality and suitability of the proposed system architecture. It evaluates how well architectural decisions address the stated requirements and NFRs, the appropriateness of selected architectural styles and patterns, the clarity of component decomposition, and the overall coherence of the solution design.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R5",
+      "name": "Overall Approach to Project",
+      "description": "This evaluates the overall problem-solving and architectural thinking demonstrated in the project. It focuses on the logical flow from problem definition to solution, the clarity of assumptions and constraints, the consideration of trade-offs and risks, and the overall professionalism and maturity of the submission. It also assesses how effectively modern practices such as AI and automation (where relevant) are considered or leveraged to enhance system capabilities, efficiency, or decision-making.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    }
+  ]
+}

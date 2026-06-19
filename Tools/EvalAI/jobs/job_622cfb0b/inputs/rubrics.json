@@ -1,0 +1,44 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Email Structure",
+      "description": "Checks subject, greeting, closing, signature and professional formatting",
+      "weight": 20,
+      "type": "email_format",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R2",
+      "name": "Email Tone",
+      "description": "Paragraphs and logical flow",
+      "weight": 20,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R3",
+      "name": "Accuracy",
+      "description": "Grammatically and Factually Correct",
+      "weight": 30,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R4",
+      "name": "Clarity",
+      "description": "Presence of Clear message",
+      "weight": 20,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R5",
+      "name": "Conciseness",
+      "description": "Evaluates grammar, clarity, conciseness and formal professional tone",
+      "weight": 10,
+      "type": "style",
+      "requires_keypoints": false
+    }
+  ]
+}

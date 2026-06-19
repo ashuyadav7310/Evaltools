@@ -1,0 +1,28 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Email Structure",
+      "description": "Checks subject, greeting, closing, signature and professional formatting",
+      "weight": 5,
+      "type": "email_format",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R2",
+      "name": "Content Expectations",
+      "description": "Evaluates whether the student includes required internship application elements",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R3",
+      "name": "Writing Clarity",
+      "description": "Evaluates sentence structure, redundancy, clarity and professionalism",
+      "weight": 5,
+      "type": "style",
+      "requires_keypoints": false
+    }
+  ]
+}

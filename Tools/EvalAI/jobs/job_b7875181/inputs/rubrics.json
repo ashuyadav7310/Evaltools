@@ -1,0 +1,36 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Scope of Thinking",
+      "description": "1: Focuses only on own tasks or team\n2: Mentions organization but stays team centric\n3: Connects team actions to wider organization\n4: Thinks across functions, systems, and outcomes",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R2",
+      "name": "Ownership & Accountability",
+      "description": "1: Emphasizes following instructions or escalation\n2: Partial ownership, still dependent on seniors\n3: Takes ownership within role boundaries\n4: Owns outcomes beyond role boundaries",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R3",
+      "name": "Trade off Awareness",
+      "description": "1: No mention of trade offs or consequences\n2: Mentions pressure but no clear choices\n3: Acknowledges delivery vs people trade offs\n4: Clearly articulates conscious trade offs",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R4",
+      "name": "Leadership Role Clarity",
+      "description": "1: Generic leadership language (motivate, communicate)\n2: Describes manager duties, not leadership impact\n3: Shows shift from \u201cdoer\u201d to \u201cenabler\u201d\n4: Clearly articulates leadership impact on enterprise outcomes",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    }
+  ]
+}

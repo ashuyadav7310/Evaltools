@@ -1,0 +1,36 @@
+{
+  "rubrics": [
+    {
+      "id": "R1",
+      "name": "Business Writing Standards",
+      "description": "Evaluate whether the answer demonstrates business professionalism, correctness of information, and relevance to the scenario.",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R2",
+      "name": "Clarity & Conciseness",
+      "description": "Evaluate readability, smooth flow of ideas, sentence quality, and conciseness.",
+      "weight": 20,
+      "type": "style",
+      "requires_keypoints": false
+    },
+    {
+      "id": "R3",
+      "name": "Cultural Adaptation",
+      "description": "Evaluate whether the writing tone and context are adapted for the intended audience (US client James Carter and UK technical lead Emily Watson).",
+      "weight": 10,
+      "type": "content",
+      "requires_keypoints": true
+    },
+    {
+      "id": "R4",
+      "name": "Presentation & Formatting",
+      "description": "Evaluate document structure, sectioning (introduction\u2013body\u2013conclusion), bullet points/tables, and visual organization.",
+      "weight": 10,
+      "type": "format",
+      "requires_keypoints": false
+    }
+  ]
+}
