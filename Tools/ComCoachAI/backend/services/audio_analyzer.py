@@ -96,14 +96,6 @@ def analyze_audio_quality(audio_path: str) -> dict:
             return _empty_result("Audio too short to analyze.")
         
         # ← ADD THIS NEW CHECK
-        if duration < 3.0:
-            # Very short audio - might be blank
-            # Do a quick energy check first
-            total_energy = sum(abs(s) for s in samples[:min(16000, len(samples))])
-            avg_sample_energy = total_energy / min(16000, len(samples))
-            if avg_sample_energy < 100:
-                return _empty_result("No speech detected - audio appears to be silent.")
-
         # ── Convert raw bytes to samples ─────────────────────
         if sampwidth == 2:
             fmt = f"{n_frames * n_channels}h"
@@ -120,6 +112,14 @@ def analyze_audio_quality(audio_path: str) -> dict:
                 (samples[i] + samples[i + 1]) // 2
                 for i in range(0, len(samples) - 1, 2)
             ]
+
+        if duration < 3.0:
+            sample_count = min(16000, len(samples))
+            if sample_count == 0:
+                return _empty_result("No audio samples were found.")
+            total_energy = sum(abs(s) for s in samples[:sample_count])
+            if total_energy / sample_count < 100:
+                return _empty_result("No speech detected - audio appears to be silent.")
 
         # ── Frame-level RMS energy analysis ──────────────────
         frame_size = int(framerate * 0.02)   # 20ms frames
@@ -164,9 +164,8 @@ def analyze_audio_quality(audio_path: str) -> dict:
                 total_speech_frames += 1
                 if in_silence:
                     pause_dur = t - silence_start_t
-                    # Only count pauses > 0.5s that don't start at the very beginning
-                    # if pause_dur >= 0.5 and silence_start_t > 0.3:
-                    if pause_dur >= 999:    
+                    # Ignore only leading silence and brief gaps between words.
+                    if pause_dur >= 0.5 and silence_start_t > 0.3:
                         pauses.append({
                             "start":    round(silence_start_t, 2),
                             "end":      round(t, 2),

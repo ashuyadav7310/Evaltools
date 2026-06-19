@@ -17,6 +17,8 @@ from routes import tests as tests_router
 from routes import interviews as interviews_router
 from routes import reports as reports_router
 from routes import invites as invites_router
+from routes import admin as admin_router
+from routes import auth as auth_router
 
 
 class SPAStaticFiles(StaticFiles):
@@ -70,10 +72,13 @@ def health():
 # Routers
 # ---------------------------------------------------------------------------
 
-app.include_router(tests_router.router, prefix="/api")
-app.include_router(interviews_router.router, prefix="/api")
-app.include_router(reports_router.router, prefix="/api")
-app.include_router(invites_router.router, prefix="/api")
+for api_prefix in ("/api", "/api/convai"):
+    app.include_router(tests_router.router, prefix=api_prefix)
+    app.include_router(interviews_router.router, prefix=api_prefix)
+    app.include_router(reports_router.router, prefix=api_prefix)
+    app.include_router(invites_router.router, prefix=api_prefix)
+    app.include_router(admin_router.router, prefix=api_prefix)
+    app.include_router(auth_router.router, prefix=api_prefix)
 
 frontend_dist = Path(__file__).resolve().parents[1] / "artifacts" / "interview-app" / "dist"
 if frontend_dist.exists():

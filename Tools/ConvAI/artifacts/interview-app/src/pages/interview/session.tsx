@@ -332,7 +332,7 @@ export default function InterviewSession() {
 
       <header className="p-6 flex justify-between items-center relative z-20 border-b border-white/5 bg-background/50 backdrop-blur-sm">
         <div className="flex items-center gap-3 flex-1">
-          <img src="/images/UNext_Logo.png" alt="uNext" className="h-8 w-auto" />
+          <img src={`${import.meta.env.BASE_URL}images/UNext_Logo.png`} alt="uNext" className="h-8 w-auto" />
           <span className="font-display font-bold tracking-wide hidden md:inline"><span className="text-muted-foreground font-normal ml-2">| {interview?.test?.title}</span></span>
         </div>
         <div className="flex items-center gap-3 md:gap-4">

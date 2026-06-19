@@ -1,0 +1,2063 @@
+D:\EvalTool\Tools\ComCoachAI\backend\main.py:32: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [31852]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+Audio conversion warning: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_112151.webm'
+Participant audio processing failed for participant_id=7
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    transcript = client.audio.transcriptions.create(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    raise Exception(f"Speech-to-text failed: {str(e)}")
+Exception: Speech-to-text failed: Connection error.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    transcript = client.audio.transcriptions.create(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    raise Exception(f"Speech-to-text failed: {str(e)}")
+Exception: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 254, in submit_audio
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 500: Processing failed: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 260, in submit_audio
+    os.remove(stt_audio_path)  #compressor
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_112151.stt.mp3'
+Audio conversion warning: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_112201.webm'
+Participant audio processing failed for participant_id=7
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    transcript = client.audio.transcriptions.create(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    raise Exception(f"Speech-to-text failed: {str(e)}")
+Exception: Speech-to-text failed: Connection error.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    transcript = client.audio.transcriptions.create(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    raise Exception(f"Speech-to-text failed: {str(e)}")
+Exception: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 254, in submit_audio
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 500: Processing failed: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 260, in submit_audio
+    os.remove(stt_audio_path)  #compressor
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_112201.stt.mp3'
+Audio conversion warning: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_113242.webm'
+Participant audio processing failed for participant_id=8
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 254, in submit_audio
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 500: Processing failed: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 260, in submit_audio
+    try:
+PermissionError: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_113242.stt.mp3'
+Audio conversion warning: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_113252.webm'
+Participant audio processing failed for participant_id=8
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 254, in submit_audio
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 500: Processing failed: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 260, in submit_audio
+    try:
+PermissionError: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_113252.stt.mp3'
+Audio conversion warning: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_113538.webm'
+Participant audio processing failed for participant_id=9
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 254, in submit_audio
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 500: Processing failed: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 260, in submit_audio
+    try:
+PermissionError: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_113538.stt.mp3'
+Audio conversion warning: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_113548.webm'
+Participant audio processing failed for participant_id=9
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 254, in submit_audio
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 500: Processing failed: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 260, in submit_audio
+    try:
+PermissionError: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_113548.stt.mp3'
+Audio conversion warning: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_124050.webm'
+Participant audio processing failed for participant_id=10
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 254, in submit_audio
+    participant.status = "pending"
+fastapi.exceptions.HTTPException: 500: Processing failed: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 260, in submit_audio
+    )
+      
+PermissionError: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_124050.stt.mp3'
+Audio conversion warning: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_124938.webm'
+Participant audio processing failed for participant_id=10
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\http_proxy.py", line 288, in handle_request
+    connect_response = self._connection.handle_request(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 990, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\ashutoshy\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 15, in transcribe_audio
+    Configured for RAW transcription with fillers and hesitations
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\resources\audio\transcriptions.py", line 188, in create
+    return self._post(  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1277, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 954, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1014, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1092, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\openai\_base_client.py", line 1024, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 165, in submit_audio
+    transcript = transcribe_audio(stt_audio_path)  #compressor
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\services\speech_to_text.py", line 28, in transcribe_audio
+    # Extract the text from verbose response
+Exception: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 254, in submit_audio
+    participant.status = "pending"
+fastapi.exceptions.HTTPException: 500: Processing failed: Speech-to-text failed: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EvalTool\Tools\ComCoachAI\backend\routes\participant.py", line 260, in submit_audio
+    )
+      
+PermissionError: [WinError 5] Access is denied: 'D:\\EvalTool\\Tools\\ComCoachAI\\uploads\\testing_k9eymi5k_20260612_124938.stt.mp3'

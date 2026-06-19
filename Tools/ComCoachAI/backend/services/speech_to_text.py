@@ -1,9 +1,13 @@
 # backend/services/speech_to_text.py
-from openai import OpenAI
+import httpx
+from openai import APIConnectionError, APIStatusError, AuthenticationError, OpenAI, RateLimitError
 from backend.config import get_settings
 
 settings = get_settings()
-client = OpenAI(api_key=settings.OPENAI_API_KEY)
+client = OpenAI(
+    api_key=settings.OPENAI_API_KEY,
+    http_client=httpx.Client(trust_env=False),
+)
 
 def transcribe_audio(audio_path: str) -> str:
     """
@@ -24,5 +28,15 @@ def transcribe_audio(audio_path: str) -> str:
             # Extract the text from verbose response
             return transcript.text
             
-    except Exception as e:
-        raise Exception(f"Speech-to-text failed: {str(e)}")
+    except APIConnectionError as exc:
+        raise RuntimeError(
+            "Speech-to-text could not reach OpenAI. Check outbound internet access and proxy settings."
+        ) from exc
+    except AuthenticationError as exc:
+        raise RuntimeError("Speech-to-text failed because the OpenAI API key was rejected.") from exc
+    except RateLimitError as exc:
+        raise RuntimeError("Speech-to-text failed because the OpenAI quota or rate limit was reached.") from exc
+    except APIStatusError as exc:
+        raise RuntimeError(f"Speech-to-text failed with OpenAI status {exc.status_code}.") from exc
+    except Exception as exc:
+        raise RuntimeError(f"Speech-to-text failed: {exc}") from exc

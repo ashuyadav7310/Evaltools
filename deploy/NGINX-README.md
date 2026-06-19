@@ -4,7 +4,7 @@ Overview
 - Homepage: https://evaltools.u-next.com/ (serves `Home page.html`)
 - EvalAI UI: https://evaltools.u-next.com/evalai/ -> localhost:3001
 - ComCoachAI UI: https://evaltools.u-next.com/comcoachai/ -> localhost:3002
-- ComCoachAI API: https://evaltools.u-next.com/api/comcoachai/ -> localhost:8002/api/
+- ComCoachAI API: https://evaltools.u-next.com/api/comcoachai/ -> localhost:8000/api/
 - ConvAI UI: https://evaltools.u-next.com/convai/ -> localhost:3003
 - ConvAI API: https://evaltools.u-next.com/api/convai/ -> localhost:8003/api/
 

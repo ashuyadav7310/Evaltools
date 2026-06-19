@@ -1,12 +1,16 @@
 # backend/services/ai_evaluation.py
 from urllib import response
+import httpx
 from openai import OpenAI
 from typing import Dict, Tuple, Optional
 import json
 from backend.config import get_settings
 
 settings = get_settings()
-client = OpenAI(api_key=settings.OPENAI_API_KEY)
+client = OpenAI(
+    api_key=settings.OPENAI_API_KEY,
+    http_client=httpx.Client(trust_env=False),
+)
 
 
 def count_fillers(transcript: str) -> dict:

@@ -1,7 +1,7 @@
-import { useParams, Link } from "wouter";
+import { useParams, Link, useLocation } from "wouter";
 import { TrainerLayout } from "@/components/layout/TrainerLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { hasTrainerApiKey, useGetReport } from "@/lib/api";
+import { hasAdminToken, hasTrainerSession, useGetReport } from "@/lib/api";
 import { ArrowLeft, CheckCircle2, TrendingUp, FileText, User, BarChart3 } from "lucide-react";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
@@ -33,12 +33,14 @@ function ScoreBar({ label, score, max }: { label: string, score: number, max: nu
 
 export default function ReportDetail() {
   const { id } = useParams();
+  const [location] = useLocation();
+  const basePath = location.startsWith("/admin") ? "/admin" : "/trainer";
   const { data: report, isLoading, isError } = useGetReport(parseInt(id || "0"));
 
-  if (!hasTrainerApiKey()) {
+  if (!hasTrainerSession() && !hasAdminToken()) {
     return (
       <TrainerLayout>
-        <div className="text-center py-20 text-muted-foreground">Save the trainer access key to view reports.</div>
+        <div className="text-center py-20 text-muted-foreground">Sign in to view reports.</div>
       </TrainerLayout>
     );
   }
@@ -77,7 +79,7 @@ export default function ReportDetail() {
   return (
     <TrainerLayout>
       <div className="mb-6">
-        <Link href="/reports" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-4">
+        <Link href={`${basePath}/reports`} className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-4">
           <ArrowLeft className="w-4 h-4 mr-1" /> Back to Reports
         </Link>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">

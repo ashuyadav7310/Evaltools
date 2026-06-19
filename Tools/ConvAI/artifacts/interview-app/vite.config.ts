@@ -13,7 +13,11 @@ export default defineConfig({
     dedupe: ["react", "react-dom"],
   },
   server: {
-    port: 5173,
+    port: 3003,
+    strictPort: true,
+    watch: {
+      ignored: ["**/public/images/**"],
+    },
     proxy: {
       // Forward /api calls to the Python FastAPI backend during development
       "/api/convai": {

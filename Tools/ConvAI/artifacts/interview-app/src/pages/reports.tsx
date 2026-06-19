@@ -1,7 +1,7 @@
 import { TrainerLayout } from "@/components/layout/TrainerLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useListReports, useListTests } from "@/lib/api";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { format } from "date-fns";
 import { Search, ChevronRight, BarChart3, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 
 export default function Reports() {
+  const [location] = useLocation();
+  const basePath = location.startsWith("/admin") ? "/admin" : "/trainer";
   const [selectedTestId, setSelectedTestId] = useState<string>("all");
   const activeTestId = selectedTestId === "all" ? undefined : Number(selectedTestId);
   const { data: reports, isLoading: reportsLoading } = useListReports(activeTestId);
@@ -149,7 +151,7 @@ export default function Reports() {
                       {report.completedAt ? format(new Date(report.completedAt), 'MMM d, yyyy') : 'N/A'}
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <Link href={`/reports/${report.interviewId}`} className="inline-flex items-center text-primary font-medium hover:text-primary/80">
+                      <Link href={`${basePath}/reports/${report.interviewId}`} className="inline-flex items-center text-primary font-medium hover:text-primary/80">
                         View Report <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                       </Link>
                     </td>

@@ -1,21 +1,25 @@
 import base64
 import io
+import logging
 import os
 from datetime import datetime
 from typing import Annotated, Optional
 
 from fastapi import APIRouter, Depends, Header, HTTPException
-from openai import APIError, OpenAI, RateLimitError
+import httpx
+from openai import APIConnectionError, AuthenticationError, OpenAI, OpenAIError, RateLimitError
 from pydantic import BaseModel, Field, StringConstraints
 from sqlalchemy.orm import Session
 
 from auth import (
+    AuthPrincipal,
     get_invite_token_from_headers,
     hash_invite_token,
     is_valid_trainer_token,
-    require_trainer_access,
+    parse_trainer_session_token,
 )
 from database import AuditLog, Interview, Invite, Report, Response, Test, get_db, now_utc
+from routes.deps import require_active_trainer_access
 from agents.agent_factory import (
     generate_next_question as generate_question_from_factory,
     generate_candidate_answer as generate_candidate_answer_from_factory,
@@ -23,15 +27,32 @@ from agents.agent_factory import (
 from agents.evaluator import evaluate_candidate, evaluate_interviewer
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 _openai = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
     base_url=os.getenv("OPENAI_BASE_URL") or None,
+    http_client=httpx.Client(trust_env=False),
 )
 
 STT_MODEL = os.getenv("STT_MODEL", "gpt-4o-mini-transcribe")
 TTS_MODEL = os.getenv("TTS_MODEL", "tts-1")
 INTERVIEWER_EVALUATION_CATEGORY = "interviewer_evaluation"
+
+
+def _ai_failure_detail(operation: str, exc: Exception) -> str:
+    if not os.getenv("OPENAI_API_KEY"):
+        return f"{operation} failed because OPENAI_API_KEY is not configured"
+    if isinstance(exc, APIConnectionError):
+        return f"{operation} failed because the backend could not reach OpenAI. Check outbound internet/proxy settings."
+    if isinstance(exc, AuthenticationError):
+        return f"{operation} failed because the OpenAI API key was rejected"
+    status_code = getattr(exc, "status_code", None)
+    if status_code in {401, 403}:
+        return f"{operation} failed because the OpenAI API key was rejected"
+    if status_code == 429 or isinstance(exc, RateLimitError):
+        return f"{operation} failed because the OpenAI quota or rate limit was reached"
+    return f"{operation} failed while contacting the AI provider"
 
 
 # ---------------------------------------------------------------------------
@@ -42,6 +63,7 @@ INTERVIEWER_EVALUATION_CATEGORY = "interviewer_evaluation"
 class CreateInterviewRequest(BaseModel):
     testId: int
     candidateName: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=200)]
+    candidateEmail: Optional[Annotated[str, StringConstraints(strip_whitespace=True, min_length=3, max_length=255)]] = None
 
 
 class NextQuestionRequest(BaseModel):
@@ -116,6 +138,7 @@ def _serialize_interview(interview: Interview) -> dict:
         "attemptNumber": interview.attempt_number,
         "testId": interview.test_id,
         "candidateName": interview.candidate_name,
+        "candidateEmail": interview.candidate_email,
         "status": interview.status,
         "currentRound": interview.current_round,
         "createdAt": interview.created_at,
@@ -197,9 +220,11 @@ def _transcribe_audio_bytes(audio_bytes: bytes, mime_type: str) -> str:
             response_format="json",
         )
         return transcription.text
-    except (APIError, RateLimitError) as exc:
-        raise HTTPException(status_code=502, detail="Transcription failed") from exc
+    except OpenAIError as exc:
+        logger.exception("Transcription failed")
+        raise HTTPException(status_code=502, detail=_ai_failure_detail("Transcription", exc)) from exc
     except Exception as exc:
+        logger.exception("Transcription failed")
         raise HTTPException(status_code=500, detail="Transcription failed") from exc
 
 
@@ -229,6 +254,7 @@ def _require_interview_access(
     db: Session,
     authorization: str | None,
     x_admin_token: str | None,
+    x_trainer_token: str | None,
     x_invite_token: str | None,
 ) -> tuple[Interview, Invite | None, str]:
     interview = db.query(Interview).filter(Interview.id == interview_id).first()
@@ -238,6 +264,16 @@ def _require_interview_access(
     if is_valid_trainer_token(authorization=authorization, x_admin_token=x_admin_token):
         return interview, None, "trainer"
 
+    bearer_token = None
+    if authorization and authorization.lower().startswith("bearer "):
+        bearer_token = authorization[7:].strip()
+    trainer_principal = parse_trainer_session_token((x_trainer_token or bearer_token or "").strip())
+    if trainer_principal:
+        test = db.query(Test).filter(Test.id == interview.test_id).first()
+        if test and test.trainer_id == trainer_principal.trainer_id:
+            return interview, None, "trainer"
+        raise HTTPException(status_code=403, detail="Interview is not owned by this trainer")
+
     invite_token = get_invite_token_from_headers(
         authorization=authorization,
         x_invite_token=x_invite_token,
@@ -245,7 +281,14 @@ def _require_interview_access(
     if not invite_token:
         raise HTTPException(status_code=401, detail="Invite token required")
     if not interview.invite_id:
-        raise HTTPException(status_code=403, detail="Interview is not invite-bound")
+        test = db.query(Test).filter(Test.id == interview.test_id).first()
+        if not test:
+            raise HTTPException(status_code=404, detail="Test not found")
+        if test.test_code_status != "active":
+            raise HTTPException(status_code=403, detail="Test code is inactive")
+        if (test.test_code or "").upper() != invite_token.strip().upper():
+            raise HTTPException(status_code=403, detail="Invalid test code")
+        return interview, None, "candidate"
 
     invite = db.query(Invite).filter(Invite.id == interview.invite_id).first()
     if not invite:
@@ -268,26 +311,33 @@ def _require_interview_access(
 
 @router.get("/interviews")
 def list_interviews(
-    _: None = Depends(require_trainer_access),
+    principal: AuthPrincipal = Depends(require_active_trainer_access),
     db: Session = Depends(get_db),
 ):
-    interviews = db.query(Interview).order_by(Interview.created_at).all()
+    query = db.query(Interview).join(Test, Test.id == Interview.test_id).order_by(Interview.created_at)
+    if principal.role == "trainer":
+        query = query.filter(Test.trainer_id == principal.trainer_id)
+    interviews = query.all()
     return [_serialize_interview(interview) for interview in interviews]
 
 
 @router.post("/interviews", status_code=201)
 def create_interview(
     body: CreateInterviewRequest,
-    _: None = Depends(require_trainer_access),
+    principal: AuthPrincipal = Depends(require_active_trainer_access),
     db: Session = Depends(get_db),
 ):
-    test = db.query(Test).filter(Test.id == body.testId).first()
+    query = db.query(Test).filter(Test.id == body.testId)
+    if principal.role == "trainer":
+        query = query.filter(Test.trainer_id == principal.trainer_id)
+    test = query.first()
     if not test:
         raise HTTPException(status_code=404, detail="Test not found")
 
     interview = Interview(
         test_id=body.testId,
         candidate_name=body.candidateName,
+        candidate_email=(body.candidateEmail or "").strip().lower() or None,
         status="pending",
         current_round=1,
     )
@@ -302,6 +352,7 @@ def get_interview(
     interview_id: int,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -310,6 +361,7 @@ def get_interview(
         db=db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
 
@@ -333,6 +385,7 @@ def next_question(
     body: NextQuestionRequest,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -341,6 +394,7 @@ def next_question(
         db=db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
 
@@ -408,9 +462,11 @@ def next_question(
             candidate_response=body.candidateResponse,
             candidate_name=interview.candidate_name,
         )
-    except (APIError, RateLimitError) as exc:
-        raise HTTPException(status_code=502, detail="Question generation failed") from exc
+    except OpenAIError as exc:
+        logger.exception("Question generation failed")
+        raise HTTPException(status_code=502, detail=_ai_failure_detail("Question generation", exc)) from exc
     except Exception as exc:
+        logger.exception("Question generation failed")
         raise HTTPException(status_code=500, detail="Question generation failed") from exc
 
     return {
@@ -426,6 +482,7 @@ def submit_response(
     body: SubmitResponseRequest,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -434,6 +491,7 @@ def submit_response(
         db=db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
     if interview.status == "completed":
@@ -487,6 +545,7 @@ def transcribe_audio(
     body: TranscribeRequest,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -495,6 +554,7 @@ def transcribe_audio(
         db=db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
     if interview.status == "completed":
@@ -512,6 +572,7 @@ def process_turn(
     body: ProcessTurnRequest,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -520,6 +581,7 @@ def process_turn(
         db=db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
     if interview.status == "completed":
@@ -569,9 +631,11 @@ def process_turn(
                 current_round=body.round,
                 session_seed=str(interview.id),
             )
-        except (APIError, RateLimitError) as exc:
-            raise HTTPException(status_code=502, detail="Candidate answer generation failed") from exc
+        except OpenAIError as exc:
+            logger.exception("Candidate answer generation failed")
+            raise HTTPException(status_code=502, detail=_ai_failure_detail("Candidate answer generation", exc)) from exc
         except Exception as exc:
+            logger.exception("Candidate answer generation failed")
             raise HTTPException(status_code=500, detail="Candidate answer generation failed") from exc
 
         response = Response(
@@ -652,9 +716,11 @@ def process_turn(
             candidate_response=transcript,
             candidate_name=interview.candidate_name,
         )
-    except (APIError, RateLimitError) as exc:
-        raise HTTPException(status_code=502, detail="Question generation failed") from exc
+    except OpenAIError as exc:
+        logger.exception("Question generation failed")
+        raise HTTPException(status_code=502, detail=_ai_failure_detail("Question generation", exc)) from exc
     except Exception as exc:
+        logger.exception("Question generation failed")
         raise HTTPException(status_code=500, detail="Question generation failed") from exc
 
     return {
@@ -671,6 +737,7 @@ def process_text_turn(
     body: ProcessTextTurnRequest,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -679,6 +746,7 @@ def process_text_turn(
         db=db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
     if interview.status == "completed":
@@ -726,9 +794,11 @@ def process_text_turn(
                 current_round=body.round,
                 session_seed=str(interview.id),
             )
-        except (APIError, RateLimitError) as exc:
-            raise HTTPException(status_code=502, detail="Candidate answer generation failed") from exc
+        except OpenAIError as exc:
+            logger.exception("Candidate answer generation failed")
+            raise HTTPException(status_code=502, detail=_ai_failure_detail("Candidate answer generation", exc)) from exc
         except Exception as exc:
+            logger.exception("Candidate answer generation failed")
             raise HTTPException(status_code=500, detail="Candidate answer generation failed") from exc
 
         response = Response(
@@ -809,9 +879,11 @@ def process_text_turn(
             candidate_response=transcript,
             candidate_name=interview.candidate_name,
         )
-    except (APIError, RateLimitError) as exc:
-        raise HTTPException(status_code=502, detail="Question generation failed") from exc
+    except OpenAIError as exc:
+        logger.exception("Question generation failed")
+        raise HTTPException(status_code=502, detail=_ai_failure_detail("Question generation", exc)) from exc
     except Exception as exc:
+        logger.exception("Question generation failed")
         raise HTTPException(status_code=500, detail="Question generation failed") from exc
 
     return {
@@ -828,6 +900,7 @@ def text_to_speech(
     body: TextToSpeechRequest,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -836,6 +909,7 @@ def text_to_speech(
         db=db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
     if interview.status == "completed":
@@ -848,9 +922,11 @@ def text_to_speech(
             input=body.text,
             response_format="wav",
         )
-    except (APIError, RateLimitError) as exc:
-        raise HTTPException(status_code=502, detail="Text-to-speech failed") from exc
+    except OpenAIError as exc:
+        logger.exception("Text-to-speech failed")
+        raise HTTPException(status_code=502, detail=_ai_failure_detail("Text-to-speech", exc)) from exc
     except Exception as exc:
+        logger.exception("Text-to-speech failed")
         raise HTTPException(status_code=500, detail="Text-to-speech failed") from exc
 
     audio_b64 = base64.b64encode(response.content).decode("utf-8")
@@ -863,6 +939,7 @@ def _finalize_interview_session(
     *,
     authorization: str | None,
     x_admin_token: str | None,
+    x_trainer_token: str | None,
     x_invite_token: str | None,
 ):
     interview, invite, actor_type = _require_interview_access(
@@ -870,6 +947,7 @@ def _finalize_interview_session(
         db=db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
 
@@ -923,9 +1001,11 @@ def _finalize_interview_session(
                     candidate_name=interview.candidate_name,
                     time_spent_seconds=metrics["timeSpentSeconds"],
                 )
-        except (APIError, RateLimitError) as exc:
-            raise HTTPException(status_code=502, detail="Evaluation failed") from exc
+        except OpenAIError as exc:
+            logger.exception("Evaluation failed")
+            raise HTTPException(status_code=502, detail=_ai_failure_detail("Evaluation", exc)) from exc
         except Exception as exc:
+            logger.exception("Evaluation failed")
             raise HTTPException(status_code=500, detail="Evaluation failed") from exc
 
         # Upsert report
@@ -983,6 +1063,7 @@ def end_session(
     interview_id: int,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -991,6 +1072,7 @@ def end_session(
         db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )
 
@@ -1000,6 +1082,7 @@ def complete_interview(
     interview_id: int,
     authorization: str | None = Header(default=None),
     x_admin_token: str | None = Header(default=None),
+    x_trainer_token: str | None = Header(default=None),
     x_invite_token: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ):
@@ -1008,5 +1091,6 @@ def complete_interview(
         db,
         authorization=authorization,
         x_admin_token=x_admin_token,
+        x_trainer_token=x_trainer_token,
         x_invite_token=x_invite_token,
     )

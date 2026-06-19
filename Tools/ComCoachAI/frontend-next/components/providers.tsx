@@ -13,7 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             refetchOnWindowFocus: false,
           },
           mutations: {
-            retry: 1,
+            retry: false,
           },
         },
       }),

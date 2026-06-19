@@ -6,9 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useListTests, useCreateInvite, useCreateTest, useDeleteTest, getListTestsQueryKey } from "@/lib/api";
+import { Switch } from "@/components/ui/switch";
+import { useListTests, useCreateTest, useDeleteTest, getListTestsQueryKey, useUpdateTestStatus } from "@/lib/api";
 import { useQueryClient } from "@tanstack/react-query";
-import { Plus, Trash2, Copy, FileText, Link as LinkIcon } from "lucide-react";
+import { Plus, Trash2, Copy, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
@@ -36,7 +37,7 @@ export default function Tests() {
 
   const createTest = useCreateTest();
   const deleteTest = useDeleteTest();
-  const createInvite = useCreateInvite();
+  const updateTestStatus = useUpdateTestStatus();
 
   const form = useForm<z.infer<typeof testSchema>>({
     resolver: zodResolver(testSchema),
@@ -55,15 +56,24 @@ export default function Tests() {
     name: "rubrics"
   });
 
+  const copyTestCodeValue = (code: string | undefined, successTitle = "Test code copied to clipboard") => {
+    if (!code) {
+      toast({ title: "Test code is not available", variant: "destructive" });
+      return;
+    }
+    navigator.clipboard.writeText(code);
+    toast({ title: successTitle });
+  };
+
   const onSubmit = (data: z.infer<typeof testSchema>) => {
     createTest.mutate({ data }, {
-      onSuccess: () => {
+      onSuccess: (test) => {
         queryClient.invalidateQueries({ queryKey: getListTestsQueryKey() });
         setIsCreateOpen(false);
         form.reset();
-        toast({ title: "Test created successfully" });
+        copyTestCodeValue(test.testCode, "Test created and code copied");
       },
-      onError: (err) => {
+      onError: () => {
         toast({ title: "Failed to create test", variant: "destructive" });
       }
     });
@@ -80,19 +90,16 @@ export default function Tests() {
     }
   };
 
-  const copyInterviewLink = (id: number) => {
-    createInvite.mutate(
-      { data: { testId: id, maxAttempts: 1 } },
+  const toggleTestStatus = (id: number, active: boolean) => {
+    updateTestStatus.mutate(
+      { id, status: active ? "active" : "inactive" },
       {
-        onSuccess: (invite) => {
-          const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
-          const path = `${base}/join/${invite.inviteToken}`.replace(/^\/\//, "/");
-          const url = `${window.location.origin}${path}`;
-          navigator.clipboard.writeText(url);
-          toast({ title: "One-time invite link copied to clipboard!" });
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: getListTestsQueryKey() });
+          toast({ title: active ? "Test code activated" : "Test code deactivated" });
         },
-        onError: () => {
-          toast({ title: "Failed to create invite", variant: "destructive" });
+        onError: (err) => {
+          toast({ title: err.message || "Failed to update test code", variant: "destructive" });
         },
       },
     );
@@ -291,17 +298,34 @@ export default function Tests() {
                         <span className="text-muted-foreground text-xs">Input</span>
                         <span className="font-semibold capitalize">{test.inputMode}</span>
                       </div>
+                      <div className="flex flex-col">
+                        <span className="text-muted-foreground text-xs">Code</span>
+                        <span className="font-mono font-semibold">{test.testCode}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-muted-foreground text-xs">Status</span>
+                        <span className="font-semibold capitalize">{test.testCodeStatus || "active"}</span>
+                      </div>
                     </div>
                   </CardContent>
-                  <CardFooter className="border-t border-white/5 pt-4 gap-2">
+                  <CardFooter className="border-t border-white/5 pt-4 gap-2 flex-wrap">
                     <Button 
                       variant="outline" 
                       className="flex-1 bg-transparent border-white/10 hover:bg-white/5"
-                      onClick={() => copyInterviewLink(test.id)}
+                      onClick={() => copyTestCodeValue(test.testCode)}
+                      disabled={(test.testCodeStatus || "active") !== "active"}
                     >
-                      <LinkIcon className="w-4 h-4 mr-2" />
-                      Copy Link
+                      <Copy className="w-4 h-4 mr-2" />
+                      Copy Code
                     </Button>
+                    <div className="flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2">
+                      <span className="text-xs font-medium text-muted-foreground">Active</span>
+                      <Switch
+                        checked={(test.testCodeStatus || "active") === "active"}
+                        onCheckedChange={(checked) => toggleTestStatus(test.id, checked)}
+                        aria-label={`${(test.testCodeStatus || "active") === "active" ? "Deactivate" : "Activate"} ${test.title}`}
+                      />
+                    </div>
                     <Button 
                       variant="ghost" 
                       size="icon" 

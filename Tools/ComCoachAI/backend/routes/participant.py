@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from sqlalchemy.orm import Session
+import logging
 import os
 import re
 from datetime import datetime, timezone, timedelta
@@ -16,6 +17,7 @@ from backend.services.storage import s3_enabled, upload_audio_file
 
 router = APIRouter(prefix="/participant", tags=["Participant"])
 settings = get_settings()
+logger = logging.getLogger(__name__)
 
 settings.upload_dir_path.mkdir(parents=True, exist_ok=True)
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -111,7 +113,7 @@ async def submit_audio(
         file_extension = audio_file.filename.split('.')[-1].lower() if '.' in audio_file.filename else 'wav'
         participant_token = _safe_filename_token(participant.name, "participant")
         test_code_token = _safe_filename_token(test.test_code if test else "test", "test")
-        timestamp_token = datetime.now(IST).strftime("%Y%m%d_%H%M%S")
+        timestamp_token = datetime.now(IST).strftime("%Y%m%d_%H%M%S_%f")
         unique_filename = f"{participant_token}_{test_code_token}_{timestamp_token}.{file_extension}"
         audio_path = str(settings.upload_dir_path / unique_filename)
 
@@ -119,7 +121,7 @@ async def submit_audio(
             content = await audio_file.read()
             f.write(content)
 
-        participant.status = "completed"
+        participant.status = "processing"
         db.commit()
 
         # ── Step 2: Convert to WAV if needed ─────────────────
@@ -131,7 +133,7 @@ async def submit_audio(
                 audio_path = wav_path
             except Exception as e:
                 # If conversion fails, use original file
-                print(f"Audio conversion warning: {e}")
+                logger.warning("Audio conversion warning: %s", e)
                 wav_path = audio_path
 
         # Validate audio
@@ -141,20 +143,27 @@ async def submit_audio(
         # ── Step 3: DIRECT AUDIO ANALYSIS ────────────────────
         # Analyze the RAW audio for pauses, energy, fluency
         # This captures what STT APIs clean/remove
-        print(f"🎙️ Analyzing audio: {audio_path}")
+        logger.info("Analyzing audio: %s", audio_path)
         audio_metrics = analyze_audio_quality(audio_path)
-        print(f"✅ Audio Analysis: {audio_metrics['num_pauses']} pauses, "
-              f"fluency={audio_metrics['fluency_score']}, "
-              f"speech={audio_metrics['speech_ratio_percent']}%")
+        logger.info(
+            "Audio analysis: %s pauses, fluency=%s, speech=%s%%",
+            audio_metrics["num_pauses"],
+            audio_metrics["fluency_score"],
+            audio_metrics["speech_ratio_percent"],
+        )
 
         # ── Step 4: Speech to Text ────────────────────────────
-        print("📝 Compressing audio for STT...")  #compressor
+        logger.info("Compressing audio for STT")
         stt_audio_path = compress_audio_for_transcription(audio_path)  #compressor
-        print(f"✅ STT audio ready: {os.path.basename(stt_audio_path)} ({os.path.getsize(stt_audio_path)} bytes)")  #compressor
+        logger.info(
+            "STT audio ready: %s (%s bytes)",
+            os.path.basename(stt_audio_path),
+            os.path.getsize(stt_audio_path),
+        )
 
-        print("📝 Transcribing audio...")
+        logger.info("Transcribing audio")
         transcript = transcribe_audio(stt_audio_path)  #compressor
-        print(f"✅ Transcript ({len(transcript.split())} words): {transcript[:80]}...")
+        logger.info("Transcript received (%s words)", len(transcript.split()))
 
 
         # ── Step 5: Validate transcript ───────────────────────
@@ -184,7 +193,7 @@ async def submit_audio(
 
         else:
             # ── Step 6: AI Evaluation ─────────────────────────
-            print("🤖 Evaluating with AI...")
+            logger.info("Evaluating transcript with AI")
             scores, total_score, strengths, improvements = evaluate_communication(
                 transcript=transcript,
                 scenario=test.scenario,
@@ -193,7 +202,7 @@ async def submit_audio(
                 difficulty_level=test.difficulty_level,
                 audio_metrics=audio_metrics  # Pass real audio data!
             )
-            print(f"✅ Evaluation complete. Score: {total_score:.1f}%")
+            logger.info("Evaluation complete. Score: %.1f%%", total_score)
 
         # ── Step 7: Save to database ──────────────────────────
         final_audio_reference = audio_path
@@ -207,6 +216,7 @@ async def submit_audio(
         participant.strengths = strengths
         participant.improvements = improvements
         participant.retake_allowed = False
+        participant.status = "completed"
 
         db.commit()
         db.refresh(participant)
@@ -241,13 +251,19 @@ async def submit_audio(
         raise
     except Exception as e:
         db.rollback()
+        participant.status = "pending"
+        db.commit()
+        logger.exception("Participant audio processing failed for participant_id=%s", participant_id)
         raise HTTPException(
-            status_code=500,
+            status_code=503 if "OpenAI" in str(e) or "Speech-to-text" in str(e) else 500,
             detail=f"Processing failed: {str(e)}"
         )
     finally:
         if stt_audio_path and stt_audio_path != audio_path and os.path.exists(stt_audio_path):  #compressor
-            os.remove(stt_audio_path)  #compressor
+            try:
+                os.remove(stt_audio_path)  #compressor
+            except OSError:
+                logger.warning("Could not remove temporary STT file: %s", stt_audio_path, exc_info=True)
 
 @router.get("/retake-status/{participant_id}")
 def get_retake_status(participant_id: int, db: Session = Depends(get_db)):

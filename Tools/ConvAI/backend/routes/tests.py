@@ -3,8 +3,9 @@ from pydantic import BaseModel, Field, StringConstraints
 from sqlalchemy.orm import Session
 from typing import Annotated, Literal, Optional
 
-from auth import require_trainer_access
-from database import Interview, Test, get_db
+from auth import AuthPrincipal
+from database import Interview, Test, generate_test_code, get_db
+from routes.deps import require_active_trainer_access
 
 router = APIRouter()
 
@@ -37,6 +38,7 @@ class UpdateTestRequest(BaseModel):
     inputMode: Optional[Literal["audio", "text"]] = None
     rounds: Optional[int] = Field(default=None, ge=1, le=10)
     rubrics: Optional[list[RubricSchema]] = None
+    testCodeStatus: Optional[Literal["active", "inactive"]] = None
 
 
 def _serialize_test(test: Test) -> dict:
@@ -49,9 +51,25 @@ def _serialize_test(test: Test) -> dict:
         "inputMode": test.input_mode,
         "rounds": test.rounds,
         "rubrics": test.rubrics,
+        "trainerId": test.trainer_id,
+        "testCode": test.test_code,
+        "testCodeStatus": test.test_code_status,
         "createdAt": test.created_at,
         "updatedAt": test.updated_at,
     }
+
+
+def _apply_test_owner_filter(query, principal: AuthPrincipal):
+    if principal.role == "trainer":
+        return query.filter(Test.trainer_id == principal.trainer_id)
+    return query
+
+
+def _generate_unique_test_code(db: Session) -> str:
+    code = generate_test_code()
+    while db.query(Test.id).filter(Test.test_code == code).first():
+        code = generate_test_code()
+    return code
 
 
 # ---------------------------------------------------------------------------
@@ -61,17 +79,17 @@ def _serialize_test(test: Test) -> dict:
 
 @router.get("/tests")
 def list_tests(
-    _: None = Depends(require_trainer_access),
+    principal: AuthPrincipal = Depends(require_active_trainer_access),
     db: Session = Depends(get_db),
 ):
-    tests = db.query(Test).order_by(Test.created_at).all()
+    tests = _apply_test_owner_filter(db.query(Test), principal).order_by(Test.created_at).all()
     return [_serialize_test(test) for test in tests]
 
 
 @router.post("/tests", status_code=201)
 def create_test(
     body: CreateTestRequest,
-    _: None = Depends(require_trainer_access),
+    principal: AuthPrincipal = Depends(require_active_trainer_access),
     db: Session = Depends(get_db),
 ):
     test = Test(
@@ -82,6 +100,9 @@ def create_test(
         input_mode=body.inputMode,
         rounds=body.rounds or 3,
         rubrics=[r.model_dump() for r in body.rubrics],
+        trainer_id=principal.trainer_id if principal.role == "trainer" else None,
+        test_code=_generate_unique_test_code(db),
+        test_code_status="active",
     )
     db.add(test)
     db.commit()
@@ -92,10 +113,10 @@ def create_test(
 @router.get("/tests/{test_id}")
 def get_test(
     test_id: int,
-    _: None = Depends(require_trainer_access),
+    principal: AuthPrincipal = Depends(require_active_trainer_access),
     db: Session = Depends(get_db),
 ):
-    test = db.query(Test).filter(Test.id == test_id).first()
+    test = _apply_test_owner_filter(db.query(Test), principal).filter(Test.id == test_id).first()
     if not test:
         raise HTTPException(status_code=404, detail="Test not found")
     return _serialize_test(test)
@@ -105,10 +126,10 @@ def get_test(
 def update_test(
     test_id: int,
     body: UpdateTestRequest,
-    _: None = Depends(require_trainer_access),
+    principal: AuthPrincipal = Depends(require_active_trainer_access),
     db: Session = Depends(get_db),
 ):
-    test = db.query(Test).filter(Test.id == test_id).first()
+    test = _apply_test_owner_filter(db.query(Test), principal).filter(Test.id == test_id).first()
     if not test:
         raise HTTPException(status_code=404, detail="Test not found")
 
@@ -126,6 +147,8 @@ def update_test(
         test.rounds = body.rounds
     if body.rubrics is not None:
         test.rubrics = [r.model_dump() for r in body.rubrics]
+    if body.testCodeStatus is not None:
+        test.test_code_status = body.testCodeStatus
 
     db.commit()
     db.refresh(test)
@@ -135,10 +158,10 @@ def update_test(
 @router.delete("/tests/{test_id}", status_code=204)
 def delete_test(
     test_id: int,
-    _: None = Depends(require_trainer_access),
+    principal: AuthPrincipal = Depends(require_active_trainer_access),
     db: Session = Depends(get_db),
 ):
-    test = db.query(Test).filter(Test.id == test_id).first()
+    test = _apply_test_owner_filter(db.query(Test), principal).filter(Test.id == test_id).first()
     if not test:
         raise HTTPException(status_code=404, detail="Test not found")
 

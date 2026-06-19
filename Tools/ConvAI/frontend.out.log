@@ -1,9 +1,58 @@
 
 > interview-agent-frontend@1.0.0 dev
-> vite --host 127.0.0.1 --port 3003
+> vite --host 127.0.0.1
 
-[2m12:09:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
 
-  [32m[1mVITE[22m v7.3.3[39m  [2mready in [0m[1m2881[22m[2m[0m ms[22m
+  [32m[1mVITE[22m v7.3.3[39m  [2mready in [0m[1m2068[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/convai/[39m
+[2m1:19:14 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/layout/TrainerLayout.tsx[22m
+[2m1:19:14 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m1:19:14 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/landing.tsx, /src/index.css[22m
+[2m1:22:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/layout/TrainerLayout.tsx[22m
+[2m1:22:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/landing.tsx, /src/index.css[22m
+[2m1:22:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m1:22:06 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/layout/TrainerLayout.tsx[22m
+[2m1:22:06 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/landing.tsx, /src/index.css[22m
+[2m1:22:06 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m1:22:07 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m2:48:07 pm[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
+[2m2:48:07 pm[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
+[2m2:48:07 pm[22m [36m[1m[vite][22m[39m server restarted.
 
   [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m3003[22m/convai/[39m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m3003[22m/convai/[39m
+[2m2:53:13 pm[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
+[2m2:53:13 pm[22m [36m[1m[vite][22m[39m server restarted.
+[2m4:18:19 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/layout/TrainerLayout.tsx[22m
+[2m4:18:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/dashboard.tsx[22m
+[2m4:18:59 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/dashboard.tsx[22m
+[2m4:19:14 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m4:19:28 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/landing.tsx[22m
+[2m5:07:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/tests.tsx[22m
+[2m5:07:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/tests.tsx[22m
+[2m5:07:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/tests.tsx[22m
+[2m6:31:20 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/App.tsx, /src/pages/trainer-login.tsx, /src/pages/participant-profile.tsx, /src/pages/interview/session.tsx, /src/pages/dashboard.tsx, /src/pages/tests.tsx, /src/pages/interview/join.tsx, /src/pages/report-detail.tsx, /src/pages/reports.tsx, /src/pages/participant-test-code.tsx, /src/components/layout/TrainerLayout.tsx, /src/components/admin/TrainerManagement.tsx[22m
+[2m6:31:21 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/App.tsx, /src/pages/trainer-login.tsx, /src/pages/participant-profile.tsx, /src/pages/interview/session.tsx, /src/pages/dashboard.tsx, /src/pages/tests.tsx, /src/pages/interview/join.tsx, /src/pages/report-detail.tsx, /src/pages/reports.tsx, /src/pages/participant-test-code.tsx, /src/components/layout/TrainerLayout.tsx, /src/components/admin/TrainerManagement.tsx[22m
+[2m6:31:45 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/tests.tsx[22m
+[2m6:32:05 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/tests.tsx[22m
+[2m12:06:02 pm[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
+[2m12:06:03 pm[22m [36m[1m[vite][22m[39m server restarted.
+[2m12:08:44 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m12:08:48 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/trainer-login.tsx, /src/index.css[22m
+[2m12:08:51 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/participant-test-code.tsx, /src/index.css[22m
+[2m12:08:55 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/participant-profile.tsx, /src/index.css[22m
+[2m12:08:58 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/landing.tsx, /src/index.css[22m
+[2m12:09:01 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/interview/session.tsx, /src/index.css[22m
+[2m12:09:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/interview/join.tsx, /src/index.css[22m
+[2m12:09:12 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/layout/TrainerLayout.tsx[22m
+[2m2:35:13 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/pages/participant-profile.tsx, /src/pages/interview/join.tsx, /src/pages/report-detail.tsx, /src/pages/trainer-login.tsx, /src/pages/dashboard.tsx, /src/pages/participant-test-code.tsx, /src/pages/interview/session.tsx, /src/components/layout/TrainerLayout.tsx, /src/pages/reports.tsx, /src/pages/tests.tsx, /src/components/admin/TrainerManagement.tsx, /src/index.css[22m
+[2m2:35:13 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/pages/participant-profile.tsx, /src/pages/interview/join.tsx, /src/pages/report-detail.tsx, /src/pages/trainer-login.tsx, /src/pages/dashboard.tsx, /src/pages/participant-test-code.tsx, /src/pages/interview/session.tsx, /src/components/layout/TrainerLayout.tsx, /src/pages/reports.tsx, /src/pages/tests.tsx, /src/components/admin/TrainerManagement.tsx, /src/index.css[22m
+[2m2:36:30 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/pages/participant-profile.tsx, /src/pages/interview/join.tsx, /src/pages/report-detail.tsx, /src/pages/trainer-login.tsx, /src/pages/dashboard.tsx, /src/pages/participant-test-code.tsx, /src/pages/interview/session.tsx, /src/components/layout/TrainerLayout.tsx, /src/pages/reports.tsx, /src/pages/tests.tsx, /src/components/admin/TrainerManagement.tsx, /src/index.css[22m
+2m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/landing.tsx[22m
+[2m12:58:14 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m12:58:44 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/interview/join.tsx, /src/index.css[22m
+[2m1:16:16 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/layout/TrainerLayout.tsx[22m
+[2m1:16:16 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/landing.tsx[22m
+[2m1:16:16 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m

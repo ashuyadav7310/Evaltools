@@ -6,11 +6,13 @@ import hashlib
 import os
 from typing import Optional
 
+import httpx
 from openai import OpenAI
 
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
     base_url=os.getenv("OPENAI_BASE_URL") or None,
+    http_client=httpx.Client(trust_env=False),
 )
 
 CHAT_MODEL = os.getenv("CHAT_MODEL", "gpt-4o")

@@ -4,13 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { saveInviteToken, useStartInviteInterview, useValidateInvite } from "@/lib/api";
-import { ArrowRight, User } from "lucide-react";
+import { ArrowRight, Mail, User } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function InterviewJoin() {
   const { inviteToken } = useParams();
   const [, setLocation] = useLocation();
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [formError, setFormError] = useState("");
 
   const token = (inviteToken || "").trim();
   const { data: inviteValidation, isLoading, isError, error } = useValidateInvite(token);
@@ -30,11 +32,26 @@ export default function InterviewJoin() {
 
   const handleStart = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !token) return;
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim().toLowerCase();
+    setFormError("");
+    if (!trimmedName) {
+      setFormError("Name is required.");
+      return;
+    }
+    if (!trimmedEmail) {
+      setFormError("Email is required.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setFormError("Enter a valid email address.");
+      return;
+    }
+    if (!token) return;
 
     startInviteInterview.mutate({
       inviteToken: token,
-      data: { candidateName: name }
+      data: { candidateName: trimmedName, candidateEmail: trimmedEmail }
     }, {
       onSuccess: (result) => {
         saveInviteToken(token);
@@ -85,7 +102,7 @@ export default function InterviewJoin() {
         className="w-full max-w-md relative z-10"
       >
         <div className="text-center mb-8">
-          <img src="/images/UNext_Logo.png" alt="uNext" className="h-14 w-auto mx-auto mb-4" />
+          <img src={`${import.meta.env.BASE_URL}images/UNext_Logo.png`} alt="uNext" className="h-14 w-auto mx-auto mb-4" />
           <p className="text-muted-foreground mt-2">AI-Powered Conversational Agent</p>
         </div>
 
@@ -110,10 +127,11 @@ export default function InterviewJoin() {
           <CardContent className="pt-6">
             <form onSubmit={handleStart} className="space-y-6">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground ml-1">Your Full Name</label>
+                <label htmlFor="direct-participant-name" className="text-sm font-medium text-foreground ml-1">Your Full Name</label>
                 <div className="relative">
                   <User className="w-5 h-5 absolute left-3 top-3 text-muted-foreground" />
                   <Input 
+                    id="direct-participant-name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Jane Doe" 
@@ -122,11 +140,31 @@ export default function InterviewJoin() {
                   />
                 </div>
               </div>
+              <div className="space-y-2">
+                <label htmlFor="direct-participant-email" className="text-sm font-medium text-foreground ml-1">Email</label>
+                <div className="relative">
+                  <Mail className="w-5 h-5 absolute left-3 top-3 text-muted-foreground" />
+                  <Input
+                    id="direct-participant-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="e.g. jane@example.com"
+                    className="pl-10 py-6 bg-background/50 border-white/10 text-lg focus-visible:ring-primary/50 transition-all"
+                    required
+                  />
+                </div>
+              </div>
+              {formError && (
+                <p className="text-sm font-medium text-destructive" role="alert">
+                  {formError}
+                </p>
+              )}
 
               <Button 
                 type="submit" 
                 className="w-full py-6 text-lg rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all group"
-                disabled={startInviteInterview.isPending || !name.trim()}
+                disabled={startInviteInterview.isPending || !name.trim() || !email.trim()}
               >
                 {startInviteInterview.isPending ? "Starting..." : "Start Conversation"}
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

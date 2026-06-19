@@ -5,6 +5,7 @@ PostgreSQL database can be used without any migration.
 """
 
 import os
+import secrets
 from datetime import datetime, timezone
 from typing import Any
 
@@ -32,6 +33,12 @@ if not DATABASE_URL:
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+
+TEST_CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+
+
+def generate_test_code() -> str:
+    return "".join(secrets.choice(TEST_CODE_ALPHABET) for _ in range(8))
 
 
 def get_db():
@@ -67,6 +74,20 @@ class Test(Base):
     input_mode = Column(String, nullable=False, default="audio")
     rounds = Column(Integer, nullable=False, default=3)
     rubrics = Column(JSON, nullable=False)  # list[{name, description?}]
+    trainer_id = Column(Integer, ForeignKey("trainer_accounts.id"), nullable=True)
+    test_code = Column(String, nullable=True, unique=True)
+    test_code_status = Column(String, nullable=False, default="active")
+    created_at = Column(DateTime(timezone=True), nullable=False, default=now_utc)
+    updated_at = Column(DateTime(timezone=True), nullable=False, default=now_utc, onupdate=now_utc)
+
+
+class TrainerAccount(Base):
+    __tablename__ = "trainer_accounts"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    email = Column(String, nullable=False, unique=True)
+    password_hash = Column(String, nullable=False)
+    status = Column(String, nullable=False, default="active")
     created_at = Column(DateTime(timezone=True), nullable=False, default=now_utc)
     updated_at = Column(DateTime(timezone=True), nullable=False, default=now_utc, onupdate=now_utc)
 
@@ -79,6 +100,7 @@ class Interview(Base):
     attempt_number = Column(Integer, nullable=True)
     test_id = Column(Integer, ForeignKey("tests.id"), nullable=False)
     candidate_name = Column(String, nullable=False)
+    candidate_email = Column(String, nullable=True)
     status = Column(String, nullable=False, default="pending")
     current_round = Column(Integer, nullable=False, default=1)
     created_at = Column(DateTime(timezone=True), nullable=False, default=now_utc)
@@ -183,10 +205,26 @@ def init_db() -> None:
                 ")"
             )
         )
+        connection.execute(
+            text(
+                "CREATE TABLE IF NOT EXISTS trainer_accounts ("
+                "id SERIAL PRIMARY KEY, "
+                "email VARCHAR(255) NOT NULL UNIQUE, "
+                "password_hash VARCHAR(255) NOT NULL, "
+                "status VARCHAR(32) NOT NULL DEFAULT 'active', "
+                "created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), "
+                "updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()"
+                ")"
+            )
+        )
         connection.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS participant_context TEXT"))
         connection.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS input_mode VARCHAR(20)"))
+        connection.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS trainer_id INTEGER"))
+        connection.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS test_code VARCHAR(32)"))
+        connection.execute(text("ALTER TABLE tests ADD COLUMN IF NOT EXISTS test_code_status VARCHAR(32)"))
         connection.execute(text("ALTER TABLE interviews ADD COLUMN IF NOT EXISTS invite_id INTEGER"))
         connection.execute(text("ALTER TABLE interviews ADD COLUMN IF NOT EXISTS attempt_number INTEGER"))
+        connection.execute(text("ALTER TABLE interviews ADD COLUMN IF NOT EXISTS candidate_email VARCHAR(255)"))
         connection.execute(text("ALTER TABLE interviews ADD COLUMN IF NOT EXISTS session_started_at TIMESTAMPTZ"))
         connection.execute(text("ALTER TABLE interviews ADD COLUMN IF NOT EXISTS session_ended_at TIMESTAMPTZ"))
         connection.execute(text("ALTER TABLE interviews ADD COLUMN IF NOT EXISTS session_duration_seconds DOUBLE PRECISION"))
@@ -210,6 +248,30 @@ def init_db() -> None:
         )
         connection.execute(
             text(
+                "UPDATE tests SET test_code_status = 'active' "
+                "WHERE test_code_status IS NULL OR btrim(test_code_status) = ''"
+            )
+        )
+        existing_codes = {
+            row[0]
+            for row in connection.execute(
+                text("SELECT test_code FROM tests WHERE test_code IS NOT NULL AND btrim(test_code) <> ''")
+            )
+        }
+        tests_without_codes = connection.execute(
+            text("SELECT id FROM tests WHERE test_code IS NULL OR btrim(test_code) = ''")
+        ).fetchall()
+        for row in tests_without_codes:
+            code = generate_test_code()
+            while code in existing_codes:
+                code = generate_test_code()
+            existing_codes.add(code)
+            connection.execute(
+                text("UPDATE tests SET test_code = :code WHERE id = :id"),
+                {"code": code, "id": row[0]},
+            )
+        connection.execute(
+            text(
                 "ALTER TABLE tests ALTER COLUMN participant_context SET DEFAULT ''"
             )
         )
@@ -218,4 +280,7 @@ def init_db() -> None:
                 "ALTER TABLE tests ALTER COLUMN input_mode SET DEFAULT 'audio'"
             )
         )
+        connection.execute(text("ALTER TABLE tests ALTER COLUMN test_code SET NOT NULL"))
+        connection.execute(text("ALTER TABLE tests ALTER COLUMN test_code_status SET DEFAULT 'active'"))
+        connection.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_tests_test_code ON tests(test_code)"))
         connection.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_interviews_invite_attempt ON interviews(invite_id, attempt_number) WHERE invite_id IS NOT NULL"))

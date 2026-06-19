@@ -1,4 +1,9 @@
 Database initialized
-INFO:     127.0.0.1:56138 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57310 - "GET /api/admin/overview HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57311 - "GET /api/admin/trainers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65218 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65222 - "GET /api/admin/overview HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64017 - "GET /api/admin/trainers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55869 - "GET /api/admin/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56734 - "GET /api/admin/tests HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50614 - "GET /api/participant/test/K9eYMi5K HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51418 - "POST /api/participant/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55349 - "POST /api/participant/submit-audio/11 HTTP/1.1" 200 OK

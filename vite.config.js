@@ -1,6 +1,11 @@
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 
+const convAiApiProxy = {
+  target: "http://127.0.0.1:8003",
+  changeOrigin: true,
+};
+
 export default defineConfig({
   server: {
     watch: {
@@ -18,9 +23,40 @@ export default defineConfig({
     },
     proxy: {
       "/evalai": {
-        target: "http://127.0.0.1:3001",
+        target: "http://127.0.0.1:3004",
         changeOrigin: true,
         ws: true,
+      },
+      "/login": {
+        target: "http://127.0.0.1:3004",
+        changeOrigin: true,
+      },
+      "/_next": {
+        target: "http://127.0.0.1:3004",
+        changeOrigin: true,
+      },
+      "/admin-access": {
+        target: "http://127.0.0.1:3004",
+        changeOrigin: true,
+      },
+      "/admin-dashboard": {
+        target: "http://127.0.0.1:3004",
+        changeOrigin: true,
+      },
+      "/api/admin/trainers": convAiApiProxy,
+      "/api/auth/trainer": convAiApiProxy,
+      "/api/tests": convAiApiProxy,
+      "/api/interviews": convAiApiProxy,
+      "/api/reports": convAiApiProxy,
+      "/api/invites": convAiApiProxy,
+      "/api/join": convAiApiProxy,
+      "/api/auth": {
+        target: "http://127.0.0.1:3004",
+        changeOrigin: true,
+      },
+      "/api/admin": {
+        target: "http://127.0.0.1:3004",
+        changeOrigin: true,
       },
       "/comcoachai": {
         target: "http://127.0.0.1:3002",
@@ -39,8 +75,7 @@ export default defineConfig({
         ws: true,
       },
       "/api/convai": {
-        target: "http://127.0.0.1:8003",
-        changeOrigin: true,
+        ...convAiApiProxy,
         rewrite: (requestPath) =>
           requestPath.replace(/^\/api\/convai/, "/api"),
       },

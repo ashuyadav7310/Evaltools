@@ -4,9 +4,36 @@ import { useListTests, useListInterviews } from "@/lib/api";
 import { FileText, Users, CheckCircle2, Clock, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { TrainerManagement } from "@/components/admin/TrainerManagement";
 
 export default function Dashboard() {
+  const [location] = useLocation();
+  const isAdmin = location.startsWith("/admin");
+
+  return isAdmin ? <AdminDashboard /> : <TrainerDashboard />;
+}
+
+function AdminDashboard() {
+  return (
+    <TrainerLayout>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="space-y-8"
+      >
+        <div>
+          <h1 className="text-4xl font-display font-bold">Admin Center</h1>
+          <p className="text-muted-foreground mt-2 text-lg">Manage trainer login access for ConvAI.</p>
+        </div>
+        <TrainerManagement />
+      </motion.div>
+    </TrainerLayout>
+  );
+}
+
+function TrainerDashboard() {
+  const basePath = "/trainer";
   const { data: tests, isLoading: testsLoading } = useListTests(true);
   const { data: interviews, isLoading: interviewsLoading } = useListInterviews(true);
 
@@ -113,7 +140,7 @@ export default function Dashboard() {
               <CardDescription>Common tasks to get started</CardDescription>
             </CardHeader>
             <CardContent className="relative z-10 space-y-4">
-               <Link href="/tests" className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-primary/20 to-primary/5 border border-primary/20 hover:from-primary/30 hover:to-primary/10 transition-all cursor-pointer group">
+               <Link href={`${basePath}/tests`} className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-primary/20 to-primary/5 border border-primary/20 hover:from-primary/30 hover:to-primary/10 transition-all cursor-pointer group">
                   <div className="bg-primary/20 p-3 rounded-lg text-primary group-hover:scale-110 transition-transform">
                     <FileText className="w-5 h-5" />
                   </div>
@@ -122,7 +149,7 @@ export default function Dashboard() {
                     <p className="text-sm text-muted-foreground">Design a new conversation scenario and rubric.</p>
                   </div>
                </Link>
-               <Link href="/reports" className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-purple-500/20 to-purple-500/5 border border-purple-500/20 hover:from-purple-500/30 hover:to-purple-500/10 transition-all cursor-pointer group">
+               <Link href={`${basePath}/reports`} className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-purple-500/20 to-purple-500/5 border border-purple-500/20 hover:from-purple-500/30 hover:to-purple-500/10 transition-all cursor-pointer group">
                   <div className="bg-purple-500/20 p-3 rounded-lg text-purple-400 group-hover:scale-110 transition-transform">
                     <BarChart3 className="w-5 h-5" />
                   </div>

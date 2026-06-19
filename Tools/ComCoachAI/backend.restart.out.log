@@ -1,0 +1,28 @@
+Database initialized
+INFO:     127.0.0.1:55469 - "GET /api/admin/trainers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55468 - "GET /api/admin/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59071 - "GET /api/admin/tests HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64477 - "GET /api/participant/test/K9eYMi5K HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59223 - "POST /api/participant/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58832 - "POST /api/participant/submit-audio/7 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:60327 - "POST /api/participant/submit-audio/7 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:57615 - "GET /api/admin/trainers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61620 - "GET /api/admin/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51853 - "GET /api/admin/tests HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50570 - "GET /api/participant/test/K9eYMi5K HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65374 - "POST /api/participant/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62657 - "POST /api/participant/submit-audio/8 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64290 - "POST /api/participant/submit-audio/8 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:63510 - "GET /api/participant/test/K9eYMi5K HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53216 - "POST /api/participant/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65498 - "POST /api/participant/submit-audio/9 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:54554 - "POST /api/participant/submit-audio/9 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59260 - "GET /api/admin/overview HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51158 - "GET /api/admin/overview HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61404 - "GET /api/admin/overview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61405 - "GET /api/admin/trainers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61683 - "GET /api/admin/tests HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60723 - "GET /api/participant/test/K9eYMi5K HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64265 - "POST /api/participant/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56498 - "POST /api/participant/submit-audio/10 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:49931 - "POST /api/participant/submit-audio/10 HTTP/1.1" 500 Internal Server Error

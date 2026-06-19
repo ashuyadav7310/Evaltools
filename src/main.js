@@ -4,8 +4,48 @@ import { getIcon } from "./icons.js";
 
 const app = document.querySelector("#app");
 
+function escapeAttribute(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
 function renderCard(tool, index) {
   const pills = tool.pills.map((pill) => `<span class="pill">${pill}</span>`).join("");
+  const backLines = tool.backDescription
+    .map((line) => `<span>${line}</span>`)
+    .join("");
+  const usageLabel = tool.usage?.trim();
+  const usageValue = tool.client?.trim();
+  const usageLine = usageLabel
+    ? `
+          <span class="usage-line" aria-label="${escapeAttribute([usageLabel, usageValue].filter(Boolean).join(" "))}">
+            <span>${usageLabel}</span>
+            ${usageValue ? `<strong>${usageValue}</strong>` : ""}
+          </span>
+      `
+    : "";
+  const statusLine = tool.status
+    ? `
+            <span class="status status-${tool.statusType ?? "default"}">
+              <span class="status-dot"></span>
+              <span>${tool.status}</span>
+            </span>
+      `
+    : "";
+  const searchText = [
+    tool.name,
+    tool.badge,
+    tool.description,
+    usageLabel,
+    usageValue,
+    ...tool.pills,
+    ...tool.backDescription
+  ]
+    .filter(Boolean)
+    .join(" ");
   const delay = `${0.34 + index * 0.1}s`;
 
   return `
@@ -16,23 +56,31 @@ function renderCard(tool, index) {
       style="animation-delay: ${delay}"
       data-tool-id="${tool.id}"
       data-api-base-url="${tool.apiBaseUrl}"
+      data-search-text="${escapeAttribute(searchText.toLowerCase())}"
     >
-      <span class="card-badge">${tool.badge}</span>
-      <div class="card-icon">${getIcon(tool.icon)}</div>
-      <h2 class="card-title">${tool.name}</h2>
-      <p class="card-desc">${tool.description}</p>
-      <div class="usage-line" aria-label="${tool.usage} ${tool.client}">
-        <span>${tool.usage}</span>
-        <strong>${tool.client}</strong>
-      </div>
-      <div class="card-pills">${pills}</div>
-      <div class="card-cta">
-        <div class="status status-${tool.statusType}">
-          <span class="status-dot"></span>
-          <span>${tool.status}</span>
-        </div>
-        <div class="cta-arrow">${getIcon("arrow")}</div>
-      </div>
+      <span class="card-inner">
+        <span class="card-face card-front">
+          <span class="card-badge">${tool.badge}</span>
+          <span class="card-main">
+            <span class="card-icon">${getIcon(tool.icon)}</span>
+            <span class="card-title">${tool.name}</span>
+            <span class="card-desc">${tool.description}</span>
+            ${usageLine}
+            <span class="card-pills">${pills}</span>
+          </span>
+          <span class="card-cta">
+            ${statusLine}
+            <span class="cta-arrow">${getIcon("arrow")}</span>
+          </span>
+        </span>
+        <span class="card-face card-back">
+          <span class="card-back-content">
+            <span class="card-back-kicker">${tool.badge}</span>
+            <span class="card-back-title">${tool.name}</span>
+            <span class="card-back-desc">${backLines}</span>
+          </span>
+        </span>
+      </span>
     </a>
   `;
 }
@@ -85,6 +133,7 @@ app.innerHTML = `
       <section class="cards" aria-label="AI tools">
         ${toolConfig.map(renderCard).join("")}
       </section>
+      <p class="empty-search" hidden>No tools match your search.</p>
 
       <section class="support-section" aria-labelledby="support-title">
         <div class="support-copy">
@@ -100,13 +149,13 @@ app.innerHTML = `
                 <span class="contact-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.89.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.26-1.26a2 2 0 0 1 2.11-.45c.92.35 1.85.58 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
                 </span>
-                <div><span>Phone</span><strong>XXXXXXX</strong></div>
+                <div><span>Phone</span><strong>+91 8431877399</strong></div>
               </div>
               <div class="contact-row">
                 <span class="contact-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
                 </span>
-                <div><span>Email</span><strong>XXXXXXXX@u-next.com</strong></div>
+                <div><span>Email</span><strong>ashutosh.yadav@u-next.com</strong></div>
               </div>
               <div class="contact-row">
                 <span class="contact-icon" aria-hidden="true">
@@ -129,6 +178,7 @@ app.innerHTML = `
 
   <footer>
     <div class="wrapper">
+    <color mode="dark" class="footer-logo" aria-hidden="true">
       <span class="footer-line">&copy; 2026 <strong>U-Next</strong> . EvalTools Platform . Internal tools</span>
     </div>
   </footer>
@@ -136,14 +186,47 @@ app.innerHTML = `
 
 const searchInput = document.querySelector(".search-shell input");
 const cards = [...document.querySelectorAll(".card")];
+const emptySearch = document.querySelector(".empty-search");
+const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 searchInput?.addEventListener("input", (event) => {
   const query = event.target.value.trim().toLowerCase();
+  let visibleCount = 0;
 
   cards.forEach((card) => {
-    const matches = card.textContent.toLowerCase().includes(query);
-    card.hidden = !matches;
+    const matches = card.dataset.searchText.includes(query);
+    card.classList.toggle("is-filtered", !matches);
+    card.setAttribute("aria-hidden", String(!matches));
+    if (matches) {
+      visibleCount += 1;
+    }
   });
+
+  if (emptySearch) {
+    emptySearch.hidden = visibleCount > 0;
+  }
 });
+
+if (!canHover) {
+  const directRedirectCardIds = new Set(["survey360", "careerinventory", "codeevaluation"]);
+
+  cards.forEach((card) => {
+    card.addEventListener("click", (event) => {
+      if (directRedirectCardIds.has(card.dataset.toolId)) {
+        return;
+      }
+
+      if (!card.classList.contains("is-flipped")) {
+        event.preventDefault();
+        cards.forEach((otherCard) => {
+          if (otherCard !== card) {
+            otherCard.classList.remove("is-flipped");
+          }
+        });
+        card.classList.add("is-flipped");
+      }
+    });
+  });
+}
 
 // contact form removed; no submit handler required

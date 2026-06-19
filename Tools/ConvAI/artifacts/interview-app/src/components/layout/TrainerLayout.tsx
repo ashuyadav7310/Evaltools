@@ -1,38 +1,35 @@
-import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, FileText, BarChart3, KeyRound } from "lucide-react";
+import { LayoutDashboard, FileText, BarChart3, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { saveTrainerApiKey } from "@/lib/api";
+import { clearTrainerSession, saveAdminToken } from "@/lib/api";
 
 interface TrainerLayoutProps {
   children: React.ReactNode;
 }
 
 export function TrainerLayout({ children }: TrainerLayoutProps) {
-  const [location] = useLocation();
-  const [token, setToken] = useState("");
+  const [location, setLocation] = useLocation();
+  const isAdmin = location.startsWith("/admin");
+  const basePath = isAdmin ? "/admin" : "/trainer";
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    setToken(window.localStorage.getItem("trainer_api_key") ?? "");
-  }, []);
-
-  const handleSaveToken = () => {
-    saveTrainerApiKey(token);
+  const handleSignOut = () => {
+    if (isAdmin) {
+      saveAdminToken("");
+      setLocation("/");
+      return;
+    }
+    clearTrainerSession();
+    setLocation("/trainer-login");
   };
 
-  const handleClearToken = () => {
-    setToken("");
-    saveTrainerApiKey("");
-  };
-
-  const navItems = [
-    { href: "/", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/tests", label: "Tests", icon: FileText },
-    { href: "/reports", label: "Reports", icon: BarChart3 },
-  ];
+  const navItems = isAdmin
+    ? [{ href: basePath, label: "Dashboard", icon: LayoutDashboard }]
+    : [
+        { href: basePath, label: "Dashboard", icon: LayoutDashboard },
+        { href: `${basePath}/tests`, label: "Tests", icon: FileText },
+        { href: `${basePath}/reports`, label: "Reports", icon: BarChart3 },
+      ];
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -40,8 +37,8 @@ export function TrainerLayout({ children }: TrainerLayoutProps) {
       <aside className="w-64 border-r border-white/5 bg-card/30 flex flex-col hidden md:flex">
         <div className="p-6 border-b border-white/5">
           <div>
-            <img src="/images/UNext_Logo.png" alt="uNext" className="h-10 w-auto" />
-            <p className="text-xs text-muted-foreground">Trainer Platform</p>
+            <img src={`${import.meta.env.BASE_URL}images/UNext_Logo.png`} alt="uNext" className="h-10 w-auto" />
+            <p className="text-xs text-muted-foreground">{isAdmin ? "Admin Center" : "Trainer Platform"}</p>
           </div>
         </div>
 
@@ -66,28 +63,11 @@ export function TrainerLayout({ children }: TrainerLayoutProps) {
           })}
         </nav>
 
-        <div className="p-4 border-t border-white/5 space-y-3">
-          <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-            <div className="mb-2 flex items-center gap-2 text-sm font-medium">
-              <KeyRound className="w-4 h-4 text-primary" />
-              Trainer Access Key
-            </div>
-            <Input
-              type="password"
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-              placeholder="Set TRAINER_API_KEY"
-              className="mb-2 bg-background/60 border-white/10"
-            />
-            <div className="flex gap-2">
-              <Button size="sm" className="flex-1" onClick={handleSaveToken}>
-                Save
-              </Button>
-              <Button size="sm" variant="outline" className="flex-1" onClick={handleClearToken}>
-                Clear
-              </Button>
-            </div>
-          </div>
+        <div className="p-4 border-t border-white/5">
+          <Button variant="outline" className="w-full justify-start gap-2" onClick={handleSignOut}>
+            <LogOut className="h-4 w-4" />
+            Sign out
+          </Button>
         </div>
       </aside>
 
@@ -96,8 +76,11 @@ export function TrainerLayout({ children }: TrainerLayoutProps) {
         {/* Mobile Header */}
         <header className="md:hidden p-4 border-b border-white/5 bg-card/30 flex items-center justify-between">
           <div className="flex items-center">
-             <img src="/images/UNext_Logo.png" alt="uNext" className="h-7 w-auto" />
+             <img src={`${import.meta.env.BASE_URL}images/UNext_Logo.png`} alt="uNext" className="h-7 w-auto" />
           </div>
+          <Button variant="ghost" size="sm" onClick={handleSignOut} aria-label="Sign out">
+            <LogOut className="h-4 w-4" />
+          </Button>
         </header>
 
         <div className="flex-1 overflow-auto p-4 md:p-8">

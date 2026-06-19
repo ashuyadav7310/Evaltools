@@ -19,7 +19,14 @@ export function uploadParticipantAudio(
       if (xhr.status >= 200 && xhr.status < 300) {
         resolve(JSON.parse(xhr.responseText));
       } else {
-        reject(new Error(xhr.responseText || `Upload failed with ${xhr.status}`));
+        let message = `Upload failed with ${xhr.status}`;
+        try {
+          const payload = JSON.parse(xhr.responseText);
+          message = payload?.detail || payload?.error || message;
+        } catch {
+          if (xhr.responseText) message = xhr.responseText;
+        }
+        reject(new Error(message));
       }
     };
     xhr.onerror = () => reject(new Error("Network error while uploading audio."));
